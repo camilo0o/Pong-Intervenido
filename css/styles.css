@@ -1,0 +1,83 @@
+:root {
+  --color-bg: #0d0d0d;
+  --color-surface: #000000;
+  --color-text: #d3f164;
+  --color-text-muted: #888888;
+  --color-border: #444444;
+  --color-net: #555555;
+  --color-button-hover: #899c1e;
+
+  --font-family: "Courier New", monospace;
+  --font-size-base: 16px;
+  --font-size-hint: 14px;
+  --letter-spacing-title: 4px;
+  --letter-spacing-button: 1px;
+
+  --spacing-xs: 10px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-button-y: 10px;
+  --spacing-button-x: 28px;
+
+  --border-width: 2px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family);
+}
+
+.game-wrapper {
+  text-align: center;
+}
+
+h1 {
+  letter-spacing: var(--letter-spacing-title);
+  margin-bottom: var(--spacing-sm);
+}
+
+canvas {
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  display: block;
+  margin: 0 auto;
+}
+
+.controls {
+  margin-top: var(--spacing-md);
+}
+
+#start-button {
+  background: var(--color-text);
+  color: var(--color-bg);
+  border: none;
+  padding: var(--spacing-button-y) var(--spacing-button-x);
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  letter-spacing: var(--letter-spacing-button);
+  cursor: pointer;
+}
+
+#start-button:hover {
+  background: var(--color-button-hover);
+}
+
+.hint {
+  margin-top: var(--spacing-xs);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-hint);
+}
+
+.hint .sep {
+  margin: 0 var(--spacing-sm);
+}
