@@ -1,6 +1,4 @@
-import { Entity } from "./Entity.js";
-
-export class Paddle extends Entity {
+class Paddle extends Entity {
   constructor(x, y, { width = 14, height = 90, speed = 420, upKey, downKey, boundsHeight }) {
     super(x, y, width, height);
     this.speed = speed;

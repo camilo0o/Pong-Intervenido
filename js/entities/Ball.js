@@ -1,6 +1,4 @@
-import { Entity } from "./Entity.js";
-
-export class Ball extends Entity {
+class Ball extends Entity {
   constructor(x, y, { size = 14, baseSpeed = 320 } = {}) {
     super(x, y, size, size);
     this.baseSpeed = baseSpeed;
@@ -9,7 +7,7 @@ export class Ball extends Entity {
     this.vy = 0;
   }
 
-  //sale con un ángulo aleatorio entre -30° y 30°, hacia la izquierda o derecha al azar.
+  // Sale con un ángulo aleatorio entre -30° y 30°, hacia la izquierda o derecha al azar.
   launchRandom() {
     const angle = (Math.random() * 60 - 30) * (Math.PI / 180);
     const direction = Math.random() < 0.5 ? -1 : 1;
@@ -25,8 +23,8 @@ export class Ball extends Entity {
     this.launchRandom();
   }
 
-  /*deja la pelota quieta en el centro sin lanzarla, para los momentos
-   de pausa entre rounds o al terminar el partido.*/
+  /* Deja la pelota quieta en el centro sin lanzarla, para los momentos
+  de pausa entre rounds o al terminar el partido.*/
   parkAtCenter(centerX, centerY) {
     this.x = centerX - this.width / 2;
     this.y = centerY - this.height / 2;
@@ -48,7 +46,7 @@ export class Ball extends Entity {
     this.vy *= -1;
   }
 
-  //reescala la velocidad manteniendo la dirección actual (usado por speedSystem).
+  // Reescala la velocidad manteniendo la dirección actual (usado por speedSystem).
   applySpeed(newSpeed) {
     const ratio = newSpeed / this.speed;
     this.vx *= ratio;

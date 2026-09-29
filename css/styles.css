@@ -1,11 +1,11 @@
 :root {
   --color-bg: #0d0d0d;
   --color-surface: #000000;
-  --color-text: #d3f164;
+  --color-text: #f2f2f2;
   --color-text-muted: #888888;
   --color-border: #444444;
   --color-net: #555555;
-  --color-button-hover: #899c1e;
+  --color-button-hover: #cccccc;
 
   --font-family: "Courier New", monospace;
   --font-size-base: 16px;
@@ -20,9 +20,6 @@
   --spacing-button-x: 28px;
 
   --border-width: 2px;
-
-  --width-canvas: 800px;
-  --height-canvas: 500px;
 }
 
 * {
@@ -54,8 +51,8 @@ canvas {
   border: var(--border-width) solid var(--color-border);
   display: block;
   margin: 0 auto;
-  width: var(--width-canvas);
-  height: var(--height-canvas);
+  max-width: 100%;
+  height: auto;
 }
 
 .controls {

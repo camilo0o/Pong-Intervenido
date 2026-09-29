@@ -1,12 +1,14 @@
 // Colision generica entre paleta y pelota ABB (Axis-Aligned Bounding Box - Caja delimitadora alineada a los ejes)
-export function checkPaddleCollision(ball, paddle) {
-    const b = ball.getBounds();
-    const p = paddle.getBounds();
-    return b.right > p.left && b.left < p.right && b.bottom > p.top && b.top < p.bottom;
+function checkPaddleCollision(ball, paddle) {
+  const b = ball.getBounds();
+  const p = paddle.getBounds();
+ 
+  return b.right > p.left && b.left < p.right && b.bottom > p.top && b.top < p.bottom;
 }
 
+
 // Rebote contra el piso y el techo de la cancha
-export function resolveWallCollision(ball, canvasHeight) {
+function resolveWallCollision(ball, canvasHeight) {
   if (ball.y <= 0) {
     ball.y = 0;
     ball.bounceY();
@@ -16,11 +18,10 @@ export function resolveWallCollision(ball, canvasHeight) {
   }
 }
 
-/*
-Rebote contra una paleta: además de invertir vx, aplica un ángulo según
-en qué parte de la paleta pegó (como en el Pong original, da más control).
-*/
-export function resolvePaddleCollision(ball, paddle, isLeftPaddle) {
+
+/*Rebote contra una paleta: además de invertir vx, aplica un ángulo según
+en qué parte de la paleta pegó (como en el Pong original, da más control).*/
+function resolvePaddleCollision(ball, paddle, isLeftPaddle) {
   ball.x = isLeftPaddle ? paddle.x + paddle.width : paddle.x - ball.width;
  
   const paddleCenter = paddle.y + paddle.height / 2;
@@ -34,9 +35,11 @@ export function resolvePaddleCollision(ball, paddle, isLeftPaddle) {
   ball.vy = Math.sin(angle) * ball.speed;
 }
 
+
 // Devuelve el numero de jugador que anota, o null si la pelota sigue en cancha
-export function checkScoring(ball, canvasWidth) {
+function checkScoring(ball, canvasWidth) {
   if (ball.x + ball.width < 0) return 2;
   if (ball.x > canvasWidth) return 1;
   return null;
 }
+

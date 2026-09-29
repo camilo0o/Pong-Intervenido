@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pong intervenido</title>
-    <link rel="stylesheet" href="css/styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pong Intervenido</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-    <main class="game-wrapper">
-        <h1>Pong Intervenido</h1>
-        <canvas id="game-canvas"></canvas>
-        <div class="controls">
-            <button id="start-button">Iniciar</button>
-            <p class="hint"> Jugador 1: W / S  <span class="sep">|</span>Jugador 2: ↑ / ↓</p>
-        </div>
-    </main>
-    <script type= "module" src="js/main.js"></script>
+  <main class="game-wrapper">
+    <h1>Pong Intervenido</h1>
+    <canvas id="game-canvas"></canvas>
+    <div class="controls">
+      <button id="start-button">Iniciar</button>
+      <p class="hint">Jugador 1: W / S <span class="sep">|</span> Jugador 2: ↑ / ↓</p>
+    </div>
+  </main>
+
+  <script src="js/entities/Entity.js"></script>
+  <script src="js/entities/Paddle.js"></script>
+  <script src="js/entities/Ball.js"></script>
+  <script src="js/entities/ScoreBoard.js"></script>
+  <script src="js/core/inputManager.js"></script>
+  <script src="js/core/gameLoop.js"></script>
+  <script src="js/core/gameState.js"></script>
+  <script src="js/systems/collisionSystem.js"></script>
+  <script src="js/systems/speedSystem.js"></script>
+  <script src="js/systems/renderSystem.js"></script>
+  <script src="js/intervention/zones.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

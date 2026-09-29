@@ -12,7 +12,7 @@ Este no es un Pong a "primero que llega a 10". Acá se juega distinto:
 
 ### Sistema de rounds (boxeo)
 El partido se divide en **rounds**. Cada round se juega hasta que alguien
-llega a **11 puntos**, y el partido lo gana quien primero se lleva
+llega a **10 puntos**, y el partido lo gana quien primero se lleva
 **3 rounds**. Entre round y round el juego se pausa, muestra quién ganó
 la manga, y espera a que se presione el botón para arrancar la siguiente.
 

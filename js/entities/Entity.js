@@ -1,4 +1,4 @@
-export class Entity {
+class Entity {
   constructor(x, y, width, height) {
     this.x = x;
     this.y = y;
@@ -6,7 +6,7 @@ export class Entity {
     this.height = height;
   }
 
-  
+  // A sobreescribir por cada entidad concreta.
   update(deltaTime, input) {}
 
   render(ctx) {
