@@ -20,6 +20,9 @@
   --spacing-button-x: 28px;
 
   --border-width: 2px;
+
+  --width-canvas: 800px;
+  --height-canvas: 500px;
 }
 
 * {
@@ -51,6 +54,8 @@ canvas {
   border: var(--border-width) solid var(--color-border);
   display: block;
   margin: 0 auto;
+  width: var(--width-canvas);
+  height: var(--height-canvas);
 }
 
 .controls {
