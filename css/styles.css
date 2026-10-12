@@ -1,15 +1,20 @@
 :root {
-  --color-bg: #0d0d0d;
+  --color-bg: #4887be;
   --color-surface: #000000;
   --color-text: #f2f2f2;
-  --color-text-muted: #888888;
+  --color-text-button:#332b9e;
+  --color-text-muted: #18238a;
   --color-border: #444444;
   --color-net: #555555;
-  --color-button-hover: #cccccc;
+  --color-button-hover: #041457;
+
+  --webkit-text-stroke-color: #0059fd;
+  --webkit-text-stroke-width: 2px;
 
   --font-family: "Courier New", monospace;
+  --font-weight-bold: 1000;
   --font-size-base: 16px;
-  --font-size-hint: 14px;
+  --font-size-hint: 16px;
   --letter-spacing-title: 4px;
   --letter-spacing-button: 1px;
 
@@ -20,6 +25,27 @@
   --spacing-button-x: 28px;
 
   --border-width: 2px;
+
+  --ball-size: 100px;
+  --ball-color: #f57c33;
+  --ball-border-width: 2px;
+  --ball-border-color: black;
+  --ball-offset-left: 100px;
+  --ball-offset-top: 50px;
+  --ball-bounce-duration: 1s;
+  --ball-bounce-depth: 300px;
+  --ball-squish-x: 1.7;
+  --ball-squish-y: 0.5;
+
+  --ball-stroke-size: 150px;
+  --ball-stroke-radius: 80px;
+  --ball-stroke2-size: 300px;
+  --ball-stroke2-radius: 150px;
+  --ball-pos-offset: 60px;
+  --ball-pos-bottom: -25px;
+  --ball-pos3-top: -100px;
+  --ball-pos3-left: 48px;
+  --ball-pos4-left: -100px;
 }
 
 * {
@@ -44,6 +70,8 @@ body {
 h1 {
   letter-spacing: var(--letter-spacing-title);
   margin-bottom: var(--spacing-sm);
+  -webkit-text-stroke: var(--webkit-text-stroke-width) var(--webkit-text-stroke-color);
+  font-weight: var(--font-weight-bold);
 }
 
 canvas {
@@ -60,7 +88,7 @@ canvas {
 }
 
 #start-button {
-  background: var(--color-text);
+  background: var(--color-text-button);
   color: var(--color-bg);
   border: none;
   padding: var(--spacing-button-y) var(--spacing-button-x);
@@ -78,8 +106,69 @@ canvas {
   margin-top: var(--spacing-xs);
   color: var(--color-text-muted);
   font-size: var(--font-size-hint);
+  font-weight: var(--font-weight-bold);
 }
 
 .hint .sep {
   margin: 0 var(--spacing-sm);
+}
+
+.ball {
+  position:relative;
+  left: var(--ball-offset-left);
+  top: var(--ball-offset-top);
+  width: var(--ball-size);
+  height: var(--ball-size);
+  background: var(--ball-color);
+  border-radius: calc(var(--ball-size) / 2);
+  overflow:hidden;
+
+  border: var(--ball-border-width) solid var(--ball-border-color);
+  animation-name:bounce;
+  animation-duration: var(--ball-bounce-duration);
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.860, 0.000, 0.070, 1.000); 
+}
+.stroke{
+  position:absolute;
+   
+  width: var(--ball-stroke-size);
+  height: var(--ball-stroke-size);
+  border-radius: var(--ball-stroke-radius);
+  border: var(--ball-border-width) solid var(--ball-border-color);
+    
+}
+.stroke2{
+  position:absolute;
+  border: var(--ball-border-width) solid var(--ball-border-color);
+  width: var(--ball-stroke2-size);
+  height: var(--ball-stroke2-size);
+  border-radius: var(--ball-stroke2-radius);
+    
+}
+
+.pos1{
+  right: var(--ball-pos-offset);
+  bottom: var(--ball-pos-bottom);
+    
+}
+.pos2{
+  left: var(--ball-pos-offset);
+  bottom: var(--ball-pos-bottom);
+    
+}
+.pos3{
+  top: var(--ball-pos3-top);
+  left: var(--ball-pos3-left)
+    
+}
+.pos4{
+  top: var(--ball-pos3-left);
+  left: var(--ball-pos4-left);
+}
+@keyframes bounce {
+  0%  {}
+  10% {transform:scaleX(1);transform:scaleY(1);}
+  50% {top: var(--ball-bounce-depth); transform:scaleX(var(--ball-squish-x));transform:scaleY(var(--ball-squish-y)); }
+  100% {top: var(--ball-offset-top);}
 }
