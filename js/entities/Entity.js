@@ -6,7 +6,7 @@ class Entity {
     this.height = height;
   }
 
-  // A sobreescribir por cada entidad concreta.
+  // A sobreescribir por cada entidad concreta. |_{°__*}_|
   update(deltaTime, input) {}
 
   render(ctx) {

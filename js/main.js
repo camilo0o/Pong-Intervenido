@@ -8,13 +8,12 @@ const pixelRatio = window.devicePixelRatio || 1;
 
 canvas.width = WIDTH * pixelRatio;
 canvas.height = HEIGHT * pixelRatio;
-canvas.style.width = `${WIDTH}px`;
-canvas.style.height = `${HEIGHT}px`;
 ctx.scale(pixelRatio, pixelRatio);
 
 const input = new InputManager();
-const gameState = new GameState({ pointsToWinRound: 11, roundsToWinMatch: 3 });
+const gameState = new GameState({ pointsToWinRound: 10, roundsToWinMatch: 3 });
 const scoreBoard = new ScoreBoard();
+const confetti = new ConfettiSystem();
 
 const PADDLE_WIDTH = 12;
 const PADDLE_HEIGHT = 65;
@@ -38,6 +37,8 @@ const paddle2 = new Paddle(WIDTH - 24 - PADDLE_WIDTH, HEIGHT / 2 - PADDLE_HEIGHT
 const ball = new Ball(WIDTH / 2 - 7, HEIGHT / 2 - 7);
 
 function update(deltaTime) {
+  confetti.update(deltaTime);
+
   if (!gameState.isPlaying()) return;
 
   paddle1.update(deltaTime, input);
@@ -55,8 +56,16 @@ function update(deltaTime) {
 
   const scorer = checkScoring(ball, WIDTH);
   if (scorer) {
-    const zoneValue = getZoneValue(ball.y + ball.height / 2, HEIGHT);
+    const pointY = ball.y + ball.height / 2;
+    const zoneValue = getZoneValue(pointY, HEIGHT);
+    const confettiX = scorer === 1 ? WIDTH - 28 : 28;
+
+    confetti.burst(confettiX, pointY, 28);
     gameState.addPoints(scorer, zoneValue);
+
+    if (gameState.isRoundOver() || gameState.isFinished()) {
+      confetti.burst(WIDTH / 2, HEIGHT / 2, 60);
+    }
 
     if (gameState.isPlaying()) {
       // el round sigue: solo se resetea el punto
@@ -81,12 +90,14 @@ function render() {
   if (gameState.isPaused()) {
     drawMessage(ctx, WIDTH, HEIGHT, "Pong Intervenido", 'Presioná "Iniciar" para comenzar');
   } else if (gameState.isRoundOver()) {
-    drawMessage(
+    drawRoundPoster(
       ctx,
       WIDTH,
       HEIGHT,
-      `Round ${gameState.currentRound - 1} para el Jugador ${gameState.lastRoundWinner}`,
-      `Rondas ${gameState.roundsWonP1} - ${gameState.roundsWonP2} · Presioná "Siguiente round"`
+      gameState.currentRound - 1,
+      gameState.lastRoundWinner,
+      gameState.roundsWonP1,
+      gameState.roundsWonP2
     );
   } else if (gameState.isFinished()) {
     drawMessage(
@@ -97,6 +108,8 @@ function render() {
       `Rondas ${gameState.roundsWonP1} - ${gameState.roundsWonP2} · Presioná "Jugar de nuevo"`
     );
   }
+
+  confetti.render(ctx);
 
   startButton.textContent = gameState.isFinished()
     ? "Jugar de nuevo"

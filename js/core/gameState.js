@@ -10,7 +10,7 @@ pointsToWinRound (usando el valor de zona de la intervención de
 básquet), y el partido lo gana quien primero gane roundsToWinMatch
 rounds. Esto reemplaza la regla base de "primero a 10 puntos".*/
 class GameState {
-  constructor({ pointsToWinRound = 11, roundsToWinMatch = 3 } = {}) {
+  constructor({ pointsToWinRound = 10, roundsToWinMatch = 3 } = {}) {
     this.state = States.PAUSED;
     this.pointsToWinRound = pointsToWinRound;
     this.roundsToWinMatch = roundsToWinMatch;

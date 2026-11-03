@@ -32,10 +32,6 @@ function drawNet(ctx, width, height) {
   ctx.setLineDash([]);
 }
 
-/* Mensajes de pausa / fin de round / fin de partido: el panel se
-dimensiona en base al ancho real del texto (ctx.measureText), con
-un tope de "width - 24" para que nunca pueda desbordar el canvas
-sin importar cuán largo sea el texto.*/
 function drawMessage(ctx, width, height, text, subtext = "") {
   const accent = getCSSColor("--color-text", "#f2f2f2");
   const muted = getCSSColor("--color-text-muted", "#888888");
@@ -74,6 +70,42 @@ function drawMessage(ctx, width, height, text, subtext = "") {
     ctx.font = subtextFont;
     ctx.fillText(subtext, width / 2, panelY + 66);
   }
+
+  ctx.restore();
+}
+
+function drawRoundPoster(ctx, width, height, round, winner, roundsWonP1, roundsWonP2) {
+  const panelWidth = Math.min(420, width - 32);
+  const panelHeight = 150;
+  const panelX = (width - panelWidth) / 2;
+  const panelY = (height - panelHeight) / 2;
+
+  ctx.save();
+
+  ctx.fillStyle = "rgba(10, 14, 24, 0.94)";
+  ctx.strokeStyle = "#ffd166";
+  ctx.lineWidth = 3;
+  drawRoundedRect(ctx, panelX, panelY, panelWidth, panelHeight, 14);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.textAlign = "center";
+
+  ctx.fillStyle = "#ffd166";
+  ctx.font = "bold 24px monospace";
+  ctx.fillText(`ROUND ${round}`, width / 2, panelY + 40);
+
+  ctx.fillStyle = "#f2f2f2";
+  ctx.font = "bold 20px monospace";
+  ctx.fillText(`JUGADOR ${winner} GANA`, width / 2, panelY + 82);
+
+  ctx.fillStyle = "#c2c8d3";
+  ctx.font = "14px monospace";
+  ctx.fillText(
+    `RONDAS ${roundsWonP1} - ${roundsWonP2}`,
+    width / 2,
+    panelY + 117
+  );
 
   ctx.restore();
 }
