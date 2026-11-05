@@ -13,7 +13,6 @@ ctx.scale(pixelRatio, pixelRatio);
 const input = new InputManager();
 const gameState = new GameState({ pointsToWinRound: 10, roundsToWinMatch: 3 });
 const scoreBoard = new ScoreBoard();
-const confetti = new ConfettiSystem();
 
 const PADDLE_WIDTH = 12;
 const PADDLE_HEIGHT = 65;
@@ -37,8 +36,6 @@ const paddle2 = new Paddle(WIDTH - 24 - PADDLE_WIDTH, HEIGHT / 2 - PADDLE_HEIGHT
 const ball = new Ball(WIDTH / 2 - 7, HEIGHT / 2 - 7);
 
 function update(deltaTime) {
-  confetti.update(deltaTime);
-
   if (!gameState.isPlaying()) return;
 
   paddle1.update(deltaTime, input);
@@ -58,14 +55,8 @@ function update(deltaTime) {
   if (scorer) {
     const pointY = ball.y + ball.height / 2;
     const zoneValue = getZoneValue(pointY, HEIGHT);
-    const confettiX = scorer === 1 ? WIDTH - 28 : 28;
 
-    confetti.burst(confettiX, pointY, 28);
     gameState.addPoints(scorer, zoneValue);
-
-    if (gameState.isRoundOver() || gameState.isFinished()) {
-      confetti.burst(WIDTH / 2, HEIGHT / 2, 60);
-    }
 
     if (gameState.isPlaying()) {
       // el round sigue: solo se resetea el punto
@@ -108,8 +99,6 @@ function render() {
       `Rondas ${gameState.roundsWonP1} - ${gameState.roundsWonP2} · Presioná "Jugar de nuevo"`
     );
   }
-
-  confetti.render(ctx);
 
   startButton.textContent = gameState.isFinished()
     ? "Jugar de nuevo"
