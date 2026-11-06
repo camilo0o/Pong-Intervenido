@@ -46,3 +46,7 @@ cualquier navegador moderno (Chrome, Firefox, Edge).
 Hecho 100% con **HTML, CSS y JavaScript** — sin librerías, sin
 frameworks ni motores de videojuegos. Todo el sistema de entidades,
 gameloop, físicas y colisiones está construido a mano con Canvas 2D.
+
+## Link
+Link para de demo: https://camilo0o.github.io/Pong-Intervenido/
+
