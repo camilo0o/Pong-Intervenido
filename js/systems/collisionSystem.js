@@ -1,4 +1,3 @@
-// Colision generica entre paleta y pelota ABB (Axis-Aligned Bounding Box - Caja delimitadora alineada a los ejes)
 function checkPaddleCollision(ball, paddle) {
   const b = ball.getBounds();
   const p = paddle.getBounds();
@@ -7,7 +6,6 @@ function checkPaddleCollision(ball, paddle) {
 }
 
 
-// Rebote contra el piso y el techo de la cancha
 function resolveWallCollision(ball, canvasHeight) {
   if (ball.y <= 0) {
     ball.y = 0;
@@ -36,7 +34,6 @@ function resolvePaddleCollision(ball, paddle, isLeftPaddle) {
 }
 
 
-// Devuelve el numero de jugador que anota, o null si la pelota sigue en cancha
 function checkScoring(ball, canvasWidth) {
   if (ball.x + ball.width < 0) return 2;
   if (ball.x > canvasWidth) return 1;

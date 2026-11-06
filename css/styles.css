@@ -1,12 +1,17 @@
 :root {
   --color-bg: #4887be;
+  --color-page-background: #111522;
+  --color-button: #c83232;
+  --color-button-hover: #041457;
+  --color-button-hover-active: #9f2929;
   --color-surface: #000000;
   --color-text: #f2f2f2;
   --color-text-button: #f2f2f2;
   --color-text-muted: #c2c8d3;
-  --color-border: #444444;
   --color-net: #555555;
-  --color-button-hover: #041457;
+  --color-glow-warm: rgba(255, 190, 90, 0.2);
+  --color-glow-blue: rgba(80, 120, 255, 0.16);
+  --color-glow-red: rgba(255, 70, 70, 0.14);
 
   --webkit-text-stroke-color: #0059fd;
   --webkit-text-stroke-width: 2px;
@@ -15,17 +20,30 @@
   --font-weight-bold: 1000;
   --font-size-base: 16px;
   --font-size-hint: 16px;
+  --font-size-title-mobile: 1.5rem;
   --letter-spacing-title: 4px;
+  --letter-spacing-title-mobile: 2px;
   --letter-spacing-button: 1px;
 
+  --spacing-body-y: 24px;
+  --spacing-body-x: 12px;
   --spacing-xs: 10px;
   --spacing-sm: 12px;
   --spacing-md: 16px;
   --spacing-button-y: 10px;
   --spacing-button-x: 28px;
 
-  --border-width: 2px;
-
+  --canvas-width: 800px;
+  --canvas-gutter: 80px;
+  --arena-gutter: 48px;
+  --z-index-wrapper: 1;
+  --button-border: none;
+  --button-cursor: pointer;
+  --page-background:
+    radial-gradient(ellipse at 50% 0%, var(--color-glow-warm), transparent 55%),
+    radial-gradient(ellipse at 10% 45%, var(--color-glow-blue), transparent 42%),
+    radial-gradient(ellipse at 90% 45%, var(--color-glow-red), transparent 42%),
+    var(--color-page-background);
 }
 
 * {
@@ -35,22 +53,18 @@
 body {
   margin: 0;
   min-height: 100vh;
-  padding: 24px 12px;
+  padding: var(--spacing-body-y) var(--spacing-body-x);
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  background:
-    radial-gradient(ellipse at 50% 0%, rgba(255, 190, 90, 0.2), transparent 55%),
-    radial-gradient(ellipse at 10% 45%, rgba(80, 120, 255, 0.16), transparent 42%),
-    radial-gradient(ellipse at 90% 45%, rgba(255, 70, 70, 0.14), transparent 42%),
-    #111522;
+  background: var(--page-background);
   color: var(--color-text);
   font-family: var(--font-family);
 }
 
 .game-wrapper {
   position: relative;
-  z-index: 1;
+  z-index: var(--z-index-wrapper);
   margin: auto 0;
   text-align: center;
 }
@@ -64,103 +78,16 @@ h1 {
 
 canvas {
   background: var(--color-surface);
-  border: var(--border-width) solid var(--color-border);
   display: block;
   margin: 0 auto;
-  width: min(800px, calc(100vw - 80px));
+  width: min(var(--canvas-width), calc(100vw - var(--canvas-gutter)));
   max-width: 100%;
   height: auto;
 }
 
 .arena-frame {
-  position: relative;
   display: inline-block;
-  max-width: calc(100vw - 48px);
-  padding: 10px;
-  border: 3px solid #d6b46a;
-  border-radius: 8px;
-  background: repeating-linear-gradient(
-    to bottom,
-    #d74747 0 3px,
-    #f2f2f2 3px 6px,
-    #d74747 6px 12px
-  );
-  box-shadow:
-    0 0 0 5px #31241d,
-    0 16px 40px rgba(0, 0, 0, 0.45);
-}
-
-.arena-frame::before {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  inset: 3px;
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  border-radius: 4px;
-  pointer-events: none;
-}
-
-.arena-frame canvas {
-  position: relative;
-  z-index: 0;
-}
-
-.boxing-glove {
-  position: absolute;
-  z-index: 2;
-  top: -25px;
-  width: 56px;
-  height: 48px;
-  border: 2px solid #70251f;
-  border-radius: 52% 48% 44% 42%;
-  background:
-    radial-gradient(ellipse at 34% 24%, rgba(255, 190, 160, 0.8), transparent 28%),
-    linear-gradient(145deg, #fb6658 8%, #d83232 68%, #a91f27);
-  box-shadow:
-    inset -4px -5px 0 rgba(112, 23, 24, 0.22),
-    2px 5px 5px rgba(0, 0, 0, 0.5);
-  pointer-events: none;
-}
-
-.boxing-glove::before {
-  content: "";
-  position: absolute;
-  left: -10px;
-  bottom: 5px;
-  width: 23px;
-  height: 20px;
-  border: 2px solid #70251f;
-  border-radius: 65% 35% 48% 55%;
-  background: linear-gradient(140deg, #f45a4d, #c92b31);
-  box-shadow: inset 2px 2px 0 rgba(255, 190, 160, 0.35);
-  transform: rotate(-28deg);
-}
-
-.boxing-glove::after {
-  content: "";
-  position: absolute;
-  right: 3px;
-  bottom: -12px;
-  width: 25px;
-  height: 19px;
-  border: 2px solid #70251f;
-  border-radius: 3px 3px 8px 8px;
-  background: repeating-linear-gradient(
-    to bottom,
-    #f4e7d0 0 4px,
-    #d8c6a9 4px 6px
-  );
-  box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.35);
-}
-
-.boxing-glove--left {
-  left: -24px;
-  transform: rotate(-18deg);
-}
-
-.boxing-glove--right {
-  right: -24px;
-  transform: scaleX(-1) rotate(-18deg);
+  max-width: calc(100vw - var(--arena-gutter));
 }
 
 .controls {
@@ -168,18 +95,18 @@ canvas {
 }
 
 #start-button {
-  background: #c83232;
+  background: var(--color-button);
   color: var(--color-text-button);
-  border: none;
+  border: var(--button-border);
   padding: var(--spacing-button-y) var(--spacing-button-x);
   font-family: inherit;
   font-size: var(--font-size-base);
   letter-spacing: var(--letter-spacing-button);
-  cursor: pointer;
+  cursor: var(--button-cursor);
 }
 
 #start-button:hover {
-  background: #9f2929;
+  background: var(--color-button-hover-active);
 }
 
 .hint {
@@ -195,19 +122,7 @@ canvas {
 
 @media (max-width: 560px) {
   h1 {
-    font-size: 1.5rem;
-    letter-spacing: 2px;
-  }
-
-  .arena-frame {
-    padding: 6px;
-  }
-
-  .boxing-glove--left {
-    transform: scale(0.8) rotate(-18deg);
-  }
-
-  .boxing-glove--right {
-    transform: scaleX(-1) scale(0.8) rotate(-18deg);
+    font-size: var(--font-size-title-mobile);
+    letter-spacing: var(--letter-spacing-title-mobile);
   }
 }

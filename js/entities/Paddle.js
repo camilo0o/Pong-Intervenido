@@ -14,7 +14,7 @@ class Paddle extends Entity {
 
     this.y += direction * this.speed * deltaTime;
 
-    // no dejar que la paleta se salga de la cancha
+    // no dejar que la paleta se salga de la cancha |-(°w°)-|
     this.y = Math.max(0, Math.min(this.boundsHeight - this.height, this.y));
   }
 }
