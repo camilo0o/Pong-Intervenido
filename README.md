@@ -48,5 +48,5 @@ frameworks ni motores de videojuegos. Todo el sistema de entidades,
 gameloop, físicas y colisiones está construido a mano con Canvas 2D.
 
 ## Link
-Link para de demo: https://camilo0o.github.io/Pong-Intervenido/
+Link para demo: https://camilo0o.github.io/Pong-Intervenido/
 
